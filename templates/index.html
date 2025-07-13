@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bulk Gmail Sender</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container py-4">
+  <h2 class="text-center mb-4">📬 Bulk Gmail Sender</h2>
+
+  {% if not logged_in %}
+    <div class="text-center">
+      <a href="{{ url_for('authorize') }}" class="btn btn-primary btn-lg">
+        Login with Google
+      </a>
+    </div>
+  {% else %}
+    <form method="post" action="/send" enctype="multipart/form-data" class="card p-4 shadow">
+      <div class="mb-3">
+        <label class="form-label">📊 Excel File (.xlsx)</label>
+        <input type="file" name="excel_file" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">📝 HTML File (.html)</label>
+        <input type="file" name="html_file" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">⏱ Delay Between Emails (seconds)</label>
+        <input type="number" name="delay" class="form-control" value="2" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">🚀 Send Emails</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="/logout" class="btn btn-outline-secondary">Logout</a>
+    </div>
+  {% endif %}
+</div>
+
+</body>
+</html>
